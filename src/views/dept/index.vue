@@ -1,5 +1,5 @@
 <script setup>
-import { queryAllApi,addApi } from "@/api/dept";
+import { queryAllApi,addApi,updateApi,deleteApi } from "@/api/dept";
 import { ref,onMounted } from "vue";
 import { ElMessage } from "element-plus";
 const deptList = ref([]);
