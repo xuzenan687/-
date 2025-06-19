@@ -19,7 +19,7 @@
 
       <el-container>
         <!-- 左侧菜单栏 -->
-        <el-aside width="200px" class="aside">
+        <el-aside width="150px" class="aside" >
           <el-menu router>
             <!-- 首页菜单 -->
             <el-menu-item index="/index">
