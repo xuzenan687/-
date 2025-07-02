@@ -1,5 +1,34 @@
-<script setup></script>
-
+<script setup>
+import {ref,onMounted}  from 'vue';
+import router from '../../router';
+import {ElMessage,ElMessageBox} from 'element-plus';
+const loginName = ref('');
+onMounted(() => {
+  const loginUser=JSON.parse(localStorage.getItem('loginUser'));
+  if(loginUser && loginUser.name){
+    loginName.value = loginUser.name;
+  }
+})
+// 退出登录
+const logout = () => {
+  //二次确认
+  ElMessageBox.confirm('确认退出登录吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(() => {
+    // 提示信息
+    ElMessage.success('退出登录成功');
+    // 清除本地存储中的登录信息
+    localStorage.removeItem('loginUser');
+    localStorage.removeItem('loginName');
+    // 跳转到登录页面
+    router.push('/login');
+  }).catch(() => {
+    //取消操作
+  });
+}
+</script>
 <template>
   <div class="common-layout">
     <el-container>
@@ -7,12 +36,12 @@
       <el-header class="header">
         <span class="title">Tlias智能学习辅助系统</span>
         <span class="right_tool">
-          <a href="">
+          <a href="javascript:void(0)">
             <el-icon><EditPen /></el-icon> 修改密码 &nbsp;&nbsp;&nbsp; |
             &nbsp;&nbsp;&nbsp;
           </a>
-          <a href="">
-            <el-icon><SwitchButton /></el-icon> 退出登录
+          <a href="javascript:void(0)" @click="logout">
+            <el-icon><SwitchButton /></el-icon> 退出登录【{{loginName}}】
           </a>
         </span>
       </el-header>
